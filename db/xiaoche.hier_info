@@ -1,0 +1,290 @@
+|xiaoche
+pwmq_R <= moto_control:inst1.pwmq_R
+clkin => clk_generator:inst2.clkin
+papo => control:inst.papo
+input[0] => control:inst.input[0]
+input[1] => control:inst.input[1]
+input[2] => control:inst.input[2]
+input[3] => control:inst.input[3]
+pwmh_R <= moto_control:inst1.pwmh_R
+pwmh_L <= moto_control:inst1.pwmh_L
+pwmq_L <= moto_control:inst1.pwmq_L
+moto_sy[0] <= moto_control:inst1.moto_sy[0]
+moto_sy[1] <= moto_control:inst1.moto_sy[1]
+moto_sy[2] <= moto_control:inst1.moto_sy[2]
+moto_sy[3] <= moto_control:inst1.moto_sy[3]
+moto_sz[0] <= moto_control:inst1.moto_sz[0]
+moto_sz[1] <= moto_control:inst1.moto_sz[1]
+moto_sz[2] <= moto_control:inst1.moto_sz[2]
+moto_sz[3] <= moto_control:inst1.moto_sz[3]
+
+
+|xiaoche|moto_control:inst1
+pwmh_L <= pwm:inst1.PWMh-L
+clk_12_5M => pwm:inst1.clk_12_5M
+ref_L[0] => pwm:inst1.ref_L[0]
+ref_L[1] => pwm:inst1.ref_L[1]
+ref_L[2] => pwm:inst1.ref_L[2]
+ref_L[3] => pwm:inst1.ref_L[3]
+ref_L[4] => pwm:inst1.ref_L[4]
+ref_R[0] => pwm:inst1.ref_R[0]
+ref_R[1] => pwm:inst1.ref_R[1]
+ref_R[2] => pwm:inst1.ref_R[2]
+ref_R[3] => pwm:inst1.ref_R[3]
+ref_R[4] => pwm:inst1.ref_R[4]
+pwmq_L <= pwm:inst1.PWMq_L
+pwmq_R <= pwm:inst1.PWMq_R
+pwmh_R <= pwm:inst1.PWMh_R
+moto_sy[0] <= translator:inst.moto_sy[0]
+moto_sy[1] <= translator:inst.moto_sy[1]
+moto_sy[2] <= translator:inst.moto_sy[2]
+moto_sy[3] <= translator:inst.moto_sy[3]
+I[0] => translator:inst.l[0]
+I[1] => translator:inst.l[1]
+r[0] => translator:inst.r[0]
+r[1] => translator:inst.r[1]
+moto_sz[0] <= translator:inst.moto_sz[0]
+moto_sz[1] <= translator:inst.moto_sz[1]
+moto_sz[2] <= translator:inst.moto_sz[2]
+moto_sz[3] <= translator:inst.moto_sz[3]
+
+
+|xiaoche|moto_control:inst1|pwm:inst1
+PWMq_L <= PWM_generator:inst.PWM
+clk_12_5M => PWM_generator:inst.clkin
+clk_12_5M => TAW_generator:inst2.clkin
+clk_12_5M => PWM_generator:inst1.clkin
+clk_12_5M => PWM_generator:inst3.clkin
+clk_12_5M => PWM_generator:inst4.clkin
+ref_L[0] => PWM_generator:inst.ref[0]
+ref_L[0] => PWM_generator:inst3.ref[0]
+ref_L[1] => PWM_generator:inst.ref[1]
+ref_L[1] => PWM_generator:inst3.ref[1]
+ref_L[2] => PWM_generator:inst.ref[2]
+ref_L[2] => PWM_generator:inst3.ref[2]
+ref_L[3] => PWM_generator:inst.ref[3]
+ref_L[3] => PWM_generator:inst3.ref[3]
+ref_L[4] => PWM_generator:inst.ref[4]
+ref_L[4] => PWM_generator:inst3.ref[4]
+PWMq_R <= PWM_generator:inst1.PWM
+ref_R[0] => PWM_generator:inst1.ref[0]
+ref_R[0] => PWM_generator:inst4.ref[0]
+ref_R[1] => PWM_generator:inst1.ref[1]
+ref_R[1] => PWM_generator:inst4.ref[1]
+ref_R[2] => PWM_generator:inst1.ref[2]
+ref_R[2] => PWM_generator:inst4.ref[2]
+ref_R[3] => PWM_generator:inst1.ref[3]
+ref_R[3] => PWM_generator:inst4.ref[3]
+ref_R[4] => PWM_generator:inst1.ref[4]
+ref_R[4] => PWM_generator:inst4.ref[4]
+PWMh-L <= PWM_generator:inst3.PWM
+PWMh_R <= PWM_generator:inst4.PWM
+
+
+|xiaoche|moto_control:inst1|pwm:inst1|PWM_generator:inst
+clkin => PWM~reg0.CLK
+ref[0] => LessThan0.IN5
+ref[1] => LessThan0.IN4
+ref[2] => LessThan0.IN3
+ref[3] => LessThan0.IN2
+ref[4] => LessThan0.IN1
+TAW[0] => LessThan0.IN10
+TAW[1] => LessThan0.IN9
+TAW[2] => LessThan0.IN8
+TAW[3] => LessThan0.IN7
+TAW[4] => LessThan0.IN6
+PWM <= PWM~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|xiaoche|moto_control:inst1|pwm:inst1|TAW_generator:inst2
+clkin => TAW[0]~reg0.CLK
+clkin => TAW[1]~reg0.CLK
+clkin => TAW[2]~reg0.CLK
+clkin => TAW[3]~reg0.CLK
+clkin => TAW[4]~reg0.CLK
+clkin => cnt[0].CLK
+clkin => cnt[1].CLK
+clkin => cnt[2].CLK
+clkin => cnt[3].CLK
+clkin => cnt[4].CLK
+clkin => up.CLK
+TAW[0] <= TAW[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+TAW[1] <= TAW[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+TAW[2] <= TAW[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+TAW[3] <= TAW[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+TAW[4] <= TAW[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|xiaoche|moto_control:inst1|pwm:inst1|PWM_generator:inst1
+clkin => PWM~reg0.CLK
+ref[0] => LessThan0.IN5
+ref[1] => LessThan0.IN4
+ref[2] => LessThan0.IN3
+ref[3] => LessThan0.IN2
+ref[4] => LessThan0.IN1
+TAW[0] => LessThan0.IN10
+TAW[1] => LessThan0.IN9
+TAW[2] => LessThan0.IN8
+TAW[3] => LessThan0.IN7
+TAW[4] => LessThan0.IN6
+PWM <= PWM~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|xiaoche|moto_control:inst1|pwm:inst1|PWM_generator:inst3
+clkin => PWM~reg0.CLK
+ref[0] => LessThan0.IN5
+ref[1] => LessThan0.IN4
+ref[2] => LessThan0.IN3
+ref[3] => LessThan0.IN2
+ref[4] => LessThan0.IN1
+TAW[0] => LessThan0.IN10
+TAW[1] => LessThan0.IN9
+TAW[2] => LessThan0.IN8
+TAW[3] => LessThan0.IN7
+TAW[4] => LessThan0.IN6
+PWM <= PWM~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|xiaoche|moto_control:inst1|pwm:inst1|PWM_generator:inst4
+clkin => PWM~reg0.CLK
+ref[0] => LessThan0.IN5
+ref[1] => LessThan0.IN4
+ref[2] => LessThan0.IN3
+ref[3] => LessThan0.IN2
+ref[4] => LessThan0.IN1
+TAW[0] => LessThan0.IN10
+TAW[1] => LessThan0.IN9
+TAW[2] => LessThan0.IN8
+TAW[3] => LessThan0.IN7
+TAW[4] => LessThan0.IN6
+PWM <= PWM~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|xiaoche|moto_control:inst1|translator:inst
+l[0] => Equal1.IN3
+l[0] => Equal2.IN3
+l[0] => Equal4.IN3
+l[1] => Equal1.IN2
+l[1] => Equal2.IN2
+l[1] => Equal4.IN2
+r[0] => Equal0.IN3
+r[0] => Equal3.IN3
+r[0] => Equal5.IN3
+r[1] => Equal0.IN2
+r[1] => Equal3.IN2
+r[1] => Equal5.IN2
+moto_sz[0] <= moto_sz.DB_MAX_OUTPUT_PORT_TYPE
+moto_sz[1] <= moto_sz.DB_MAX_OUTPUT_PORT_TYPE
+moto_sz[2] <= moto_sz.DB_MAX_OUTPUT_PORT_TYPE
+moto_sz[3] <= moto_sz.DB_MAX_OUTPUT_PORT_TYPE
+moto_sy[0] <= moto_sy.DB_MAX_OUTPUT_PORT_TYPE
+moto_sy[1] <= moto_sy.DB_MAX_OUTPUT_PORT_TYPE
+moto_sy[2] <= moto_sy.DB_MAX_OUTPUT_PORT_TYPE
+moto_sy[3] <= moto_sy.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|xiaoche|clk_generator:inst2
+clkin => divider_4:U0.clkin
+clkin => divider_1M:U1.clkin
+clk_12_5M <= divider_4:U0.clkout
+clk_50 <= divider_1M:U1.clkout
+
+
+|xiaoche|clk_generator:inst2|divider_4:U0
+clkin => clkout~reg0.CLK
+clkin => cnt.CLK
+clkin => clkt.CLK
+clkout <= clkout~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|xiaoche|clk_generator:inst2|divider_1M:U1
+clkin => clkout~reg0.CLK
+clkin => cnt[0].CLK
+clkin => cnt[1].CLK
+clkin => cnt[2].CLK
+clkin => cnt[3].CLK
+clkin => cnt[4].CLK
+clkin => cnt[5].CLK
+clkin => cnt[6].CLK
+clkin => cnt[7].CLK
+clkin => cnt[8].CLK
+clkin => cnt[9].CLK
+clkin => cnt[10].CLK
+clkin => cnt[11].CLK
+clkin => cnt[12].CLK
+clkin => cnt[13].CLK
+clkin => cnt[14].CLK
+clkin => cnt[15].CLK
+clkin => cnt[16].CLK
+clkin => cnt[17].CLK
+clkin => cnt[18].CLK
+clkin => clkt.CLK
+clkout <= clkout~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|xiaoche|control:inst
+clk_50 => ref_R[0]~reg0.CLK
+clk_50 => ref_R[1]~reg0.CLK
+clk_50 => ref_R[2]~reg0.CLK
+clk_50 => ref_R[3]~reg0.CLK
+clk_50 => ref_R[4]~reg0.CLK
+clk_50 => ref_L[0]~reg0.CLK
+clk_50 => ref_L[1]~reg0.CLK
+clk_50 => ref_L[2]~reg0.CLK
+clk_50 => ref_L[3]~reg0.CLK
+clk_50 => ref_L[4]~reg0.CLK
+clk_50 => r[0]~reg0.CLK
+clk_50 => r[1]~reg0.CLK
+clk_50 => l[0]~reg0.CLK
+clk_50 => l[1]~reg0.CLK
+clk_50 => NextState~1.DATAIN
+papo => ref_L.OUTPUTSELECT
+papo => ref_L.OUTPUTSELECT
+papo => ref_L.OUTPUTSELECT
+papo => ref_L.OUTPUTSELECT
+papo => ref_L.OUTPUTSELECT
+papo => ref_R.OUTPUTSELECT
+papo => ref_R.OUTPUTSELECT
+papo => ref_R.OUTPUTSELECT
+papo => ref_R.OUTPUTSELECT
+papo => ref_R.OUTPUTSELECT
+input[0] => Mux0.IN19
+input[0] => Mux1.IN19
+input[0] => Mux2.IN19
+input[0] => Mux3.IN19
+input[0] => Mux4.IN19
+input[0] => Mux5.IN19
+input[1] => Mux0.IN18
+input[1] => Mux1.IN18
+input[1] => Mux2.IN18
+input[1] => Mux3.IN18
+input[1] => Mux4.IN18
+input[1] => Mux5.IN18
+input[2] => Mux0.IN17
+input[2] => Mux1.IN17
+input[2] => Mux2.IN17
+input[2] => Mux3.IN17
+input[2] => Mux4.IN17
+input[2] => Mux5.IN17
+input[3] => Mux0.IN16
+input[3] => Mux1.IN16
+input[3] => Mux2.IN16
+input[3] => Mux3.IN16
+input[3] => Mux4.IN16
+input[3] => Mux5.IN16
+l[0] <= l[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+l[1] <= l[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+r[0] <= r[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+r[1] <= r[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ref_L[0] <= ref_L[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ref_L[1] <= ref_L[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ref_L[2] <= ref_L[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ref_L[3] <= ref_L[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ref_L[4] <= ref_L[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ref_R[0] <= ref_R[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ref_R[1] <= ref_R[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ref_R[2] <= ref_R[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ref_R[3] <= ref_R[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ref_R[4] <= ref_R[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+

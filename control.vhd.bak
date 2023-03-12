@@ -1,0 +1,73 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+use ieee.std_logic_arith.all;
+
+entity	control	is
+	port(
+		clk_50 	:		in	std_logic;
+		input 	:		in	std_logic_vector(3 downto 0);
+		l :				out	std_logic_vector(3 downto 0);
+		r :				out	std_logic_vector(3 downto 0);
+		ref_L :			out	integer range 0 to 20 + 1 ;
+		ref_R :			out	integer range 0 to 20 + 1 );
+end	control;
+architecture	beh	of	control	is
+	type	state	is		(START,FORWARD,STOP,TURN_LEFT,TURN_RIGHT);
+	signal	PresentState:	state;
+	signal	NextState:		state;	
+begin
+SwitchToNextState : process (clk_50,input)
+  begin
+  if clk_50'event and clk_50='1' then
+  case input is--白1 黑0 引脚4321 板子2134
+    when "1111" =>
+	 NextState <= FORWARD;
+	 when "1010" =>
+	 NextState <= FORWARD;
+	 when "0000" =>
+	 NextState <= STOP;
+	 when "1101" =>
+	 NextState <= TURN_LEFT;
+	 when "1100" =>
+	 NextState <= TURN_LEFT;
+	 when "1000" =>
+	 NextState <= TURN_LEFT;
+	 when "0111" =>
+	 NextState <= TURN_RIGHT;
+	 when "0011" =>
+	 NextState <= TURN_RIGHT;
+	 when "0010" =>
+	 NextState <= TURN_RIGHT;
+	 when others =>
+	 NextState <= FORWARD;
+	 end case;
+  if NextState = FORWARD then
+  l <= "1010";
+  r <= "1010";
+  ref_l <= 14;
+  ref_R <= 14;
+  elsif NextState = STOP then
+  l <= "0000";
+  r <= "0000";
+  ref_l <= 0;
+  ref_R <= 0;
+  elsif NextState = TURN_LEFT then
+  l <= "1010";
+  r <= "0000";
+  ref_l <= 11;
+  ref_R <= 11;
+  elsif NextState = TURN_RIGHT then
+  l <= "0000";
+  r <= "1010";
+  ref_l <= 11;
+  ref_R <= 11;
+  else
+  l <= "1010";
+  r <= "1010";
+  ref_l <= 11;
+  ref_R <= 11;
+  end if;
+  end if;
+end process StateMode;
+end beh;
